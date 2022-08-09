@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 const ContactForm = ({ onSubmit, state, onChange }) => {
   const nameRegExp = "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+  // eslint-disable-next-line
   const phoneRegexp = "\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
 
     return (

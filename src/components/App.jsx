@@ -1,6 +1,4 @@
 import React, { Component } from "react"
-// import styled from "styled-components"
-import { nanoid } from "nanoid"
 import ContactForm from "./organisms/Form/Form"
 import Title from "./atoms/Title/Title"
 import Filter from "./atoms/Input/Input"
@@ -15,34 +13,18 @@ class App extends Component {
       {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
-    name: "",
-    number: "",
     filter: ""
   }
   
-  onSubmit = ( event ) => {
-    event.preventDefault()
-    
-    if (this.state.contacts.find((contact) => contact.name === this.state.name)) {
-      alert(`${this.state.name} is already in contacts`)
-      this.setState({
-        name: "",
-        number: ""
-      })
+  onSubmit = ( data ) => {
+    if (this.state.contacts.find((contact) => contact.name === data.name)) {
+      alert(`${data.name} is already in contacts`)
       return
     }
 
-    this.setState({
-      contacts: [
-        ...this.state.contacts,
-        { id: 'id-' + nanoid(1), name: this.state.name, number: this.state.number }],
-      name: "",
-      number: "",
-    })
-  }
-
-  onChange = (event, field) => {
-    this.setState({ [field]: event.target.value })
+    this.setState(({ contacts }) => ({
+      contacts: [data, ...contacts]
+    }))
   }
 
   onSearch = ( event ) => {
@@ -65,7 +47,7 @@ class App extends Component {
     return (
       <StyledWrapper>
         <Title headerTitle="Phonebook" />
-        <ContactForm onSubmit={this.onSubmit} state={this.state} onChange={this.onChange} />
+        <ContactForm onSubmit={this.onSubmit} />
         <Title headerTitle="Contacts" />
         <Title headerTitle="Find contacts by name" />
         <Filter
